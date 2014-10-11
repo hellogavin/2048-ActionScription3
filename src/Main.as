@@ -71,6 +71,7 @@ package
 					break;
 				case Keyboard.R:
 					Grid.getInstance().resetGame();
+					Grid.getInstance().createRandomCell();
 					break;
 			}
 			if (GameManager.getInstance().moves > 0)

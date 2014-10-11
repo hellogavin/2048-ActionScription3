@@ -1,10 +1,8 @@
 package com.gavin.game.view
 {
 	import com.gavin.game.manager.GameManager;
-	import com.greensock.TweenMax;
 
 	import flash.display.Sprite;
-	import flash.utils.setTimeout;
 
 	/**
 	 * ...
@@ -39,12 +37,20 @@ package com.gavin.game.view
 
 		public function resetGame():void
 		{
+			if (_GridData != null)
+			{
+				for each (var cell:Cell in _GridData)
+				{
+					cell.value = 0;
+				}
+				return;
+			}
 			_GridData = new Vector.<Cell>();
 			for (var i:int = 0; i < gridNum; i++)
 			{
 				for (var j:int = 0; j < gridNum; j++)
 				{
-					var cell:Cell = new Cell();
+					cell = new Cell();
 					cell.posX = j;
 					cell.posY = i;
 					cell.x = cell.posX * (cell.width + SPACE);
@@ -202,58 +208,6 @@ package com.gavin.game.view
 				return null
 			return _GridData[$y * gridNum + $x];
 		}
-
-/*		private function getNextVerticalCell($x:int, $y:int):Cell
-		{
-			for (var i:int = $y + 1; i < gridNum; i++)
-			{
-				var cell:Cell = getCell($x, i);
-				if (cell.value != 0)
-					return cell;
-				if (i == gridNum - 1)
-					return cell;
-			}
-			return null;
-		}
-
-		private function getPrevVerticalCell($x:int, $y:int):Cell
-		{
-			for (var i:int = $y - 1; i >= 0; i--)
-			{
-				var cell:Cell = getCell($x, i);
-				if (cell.value != 0)
-					return cell;
-				if (i == 0)
-					return cell;
-			}
-			return null;
-		}
-
-		private function getPrevHorizontalCell($x:int, $y:int):Cell
-		{
-			for (var i:int = $x - 1; i >= 0; i--)
-			{
-				var cell:Cell = getCell(i, $y);
-				if (cell.value > 0)
-					return cell;
-				if (i == 0)
-					return cell;
-			}
-			return null;
-		}
-
-		private function getNextHorizontalCell($x:int, $y:int):Cell
-		{
-			for (var i:int = $x + 1; i < gridNum; i++)
-			{
-				var cell:Cell = getCell(i, $y);
-				if (cell.value != 0)
-					return cell;
-				if (i == gridNum - 1)
-					return cell;
-			}
-			return null;
-		}*/
 
 		public static function getInstance():Grid
 		{
